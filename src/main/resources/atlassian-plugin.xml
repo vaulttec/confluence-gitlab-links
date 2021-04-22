@@ -1,0 +1,102 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+		<param name="configure.url">/plugins/servlet/gitlab-link/configurePlugin.action</param>
+        <param name="atlassian-data-center-status">compatible</param>
+        <param name="atlassian-data-center-compatible">true</param>
+    </plugin-info>
+
+	<resource type="i18n" name="i18n" location="confluence-gitlab-link" />
+
+	<rest key="rest" path="/api" version="1.0">
+		<description>Provides REST resources for this plugin.</description>
+	</rest>
+    
+	<xhtml-macro key="code-block" name="code-block" 
+		class="org.vaulttec.confluence.gitlab.link.macro.CodeBlockMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+			<parameter name="language" type="enum" default="java">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="false" />
+				<value name="actionscript3" />
+				<value name="applescript" />
+				<value name="bash" />
+				<value name="c#" />
+				<value name="cpp" />
+				<value name="css" />
+				<value name="coldfusion" />
+				<value name="delphi" />
+				<value name="diff" />
+				<value name="erl" />
+				<value name="groovy" />
+				<value name="xml" />
+				<value name="java" />
+				<value name="jfx" />
+				<value name="js" />
+				<value name="php" />
+				<value name="perl" />
+				<value name="text" />
+				<value name="powershell" />
+				<value name="py" />
+				<value name="ruby" />
+				<value name="sql" />
+				<value name="sass" />
+				<value name="scala" />
+				<value name="vb" />
+				<value name="yml" />
+			</parameter>
+			<parameter name="gutter" type="boolean" default="false">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="false" />
+			</parameter>
+			<parameter name="firstLine" type="string" default="">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="false" />
+			</parameter>
+			<parameter name="lastLine" type="string" default="">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="false" />
+			</parameter>
+			<parameter name="theme" type="enum" default="Confluence">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="false" />
+				<value name="DJango" />
+				<value name="Emacs" />
+				<value name="FadeToGrey" />
+				<value name="Midnight" />
+				<value name="RDark" />
+				<value name="Eclipse" />
+				<value name="Confluence" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
+	<servlet key="config-servlet" name="Config Servlet" class="org.vaulttec.confluence.gitlab.link.config.ConfigServlet">
+		<url-pattern>/gitlab-link/configurePlugin.action</url-pattern>
+	</servlet>
+	<web-item key="config-menu-item" name="Configuration Link" section="system.admin/configuration" weight="100">
+		<description>Gitlab Link Configuration</description>
+		<label key="org.vaulttec.confluence-gitlab-link.config.title" />
+		<link linkId="config">/plugins/servlet/gitlab-link/configurePlugin.action</link>
+	</web-item>
+
+	<web-resource key="autoconvert-gitlab-link" name="Autoconvert GitLab link to macro">
+		<description>Changes GitLab URLs pasted into a macro</description>
+		<resource type="download" name="autoconvert-gitlab-link.js"
+			location="js/autoconvert-gitlab-link.js" />
+		<dependency>com.atlassian.confluence.plugins.confluence-paste:autoconvert-core</dependency>
+		<dependency>com.atlassian.auiplugin:ajs</dependency>
+		<context>editor</context>
+	</web-resource>
+
+</atlassian-plugin>
