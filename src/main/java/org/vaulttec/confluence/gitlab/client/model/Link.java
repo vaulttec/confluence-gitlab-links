@@ -50,7 +50,8 @@ public class Link {
 	public String getProject() {
 		if (type != Type.INVALID && type != Type.GROUP) {
 			String context = getContext();
-			return context.substring(0, context.indexOf("/-/"));
+			int delimiter = context.indexOf("/-/");
+			return delimiter >= 0 ? context.substring(0, delimiter) : context;
 		}
 		return null;
 	}
@@ -62,7 +63,7 @@ public class Link {
 			case GROUP:
 				return context;
 			case PROJECT:
-				return context.substring(0, context.indexOf("/"));
+				return context.substring(context.indexOf("/") + 1);
 			case BRANCH:
 				return context.substring(context.indexOf("/-/tree/") + 8);
 			case FOLDER: {

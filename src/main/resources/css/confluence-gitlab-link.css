@@ -1,0 +1,48 @@
+.avatar {
+	float: left;
+}
+.circle {
+	border-radius: 50%;
+
+	width: 25px;
+	height: 25px;
+	padding: 8px;
+	display: inline-block;
+
+	background: #fff;
+	border: 2px solid #666;
+	color: #666;
+	text-align: center;
+
+	font: 23px Arial, sans-serif;
+}
+
+.project {
+	margin-bottom: 10px;
+	margin-top: 10px;
+}
+.project-name {
+	padding-left: 50px;
+	padding-top: 10px;
+	min-height: 40px;
+}
+.project-details {
+	padding-left: 10px;
+}
+.project-tags {
+	padding-left: 10px;
+}
+
+.label{
+	background-color: #a8d695;
+	color: #333333;
+	padding: 2px 4px;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: normal;
+	display: inline-block;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	border-radius: .25em;
+}

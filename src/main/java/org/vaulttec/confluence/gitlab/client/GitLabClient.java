@@ -18,11 +18,13 @@
 package org.vaulttec.confluence.gitlab.client;
 
 import org.vaulttec.confluence.gitlab.client.model.Link;
+import org.vaulttec.confluence.gitlab.client.model.Project;
 import org.vaulttec.confluence.gitlab.client.model.Version;
 
 public interface GitLabClient {
 	String getServerUrl();
 	Link getLink(String url);
 	Version getVersion();
+	Project getProject(String projectId, String username);
 	String getRawFile(String projectId, String filePath, String ref, String username);
 }

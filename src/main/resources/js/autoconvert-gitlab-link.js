@@ -31,6 +31,14 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 						}
 					}
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+
+				// File URL, e.g. https://gitlab.com/gitlab-org/gitlab
+				} else if (directoryParts.length == 3) {
+					let macro = {
+						'name': 'project',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
 				} else {
 					done();
 				}

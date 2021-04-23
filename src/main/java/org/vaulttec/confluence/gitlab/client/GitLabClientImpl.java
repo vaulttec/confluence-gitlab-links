@@ -32,6 +32,7 @@ import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaulttec.confluence.gitlab.client.model.Link;
+import org.vaulttec.confluence.gitlab.client.model.Project;
 import org.vaulttec.confluence.gitlab.client.model.Version;
 import org.vaulttec.confluence.gitlab.link.config.ConfigStore;
 
@@ -73,9 +74,16 @@ public class GitLabClientImpl implements GitLabClient {
 	}
 
 	@Override
+	public Project getProject(String projectId, String username) {
+		LOG.debug("Get details of project '{}' for user '{}'", projectId, username);
+		return get("/projects/" + encode(projectId) + "?sudo=" + username, Project.class);
+	}
+
+	@Override
 	public String getRawFile(String projectId, String filePath, String ref, String username) {
 		LOG.debug("Get raw file '{}' ({}) in project '{}' for user '{}'", filePath, ref, projectId, username);
-		return get("/projects/" + encode(projectId) + "/repository/files/" + encode(filePath) + "/raw?ref=" + ref + "&sudo=" + username);
+		return get("/projects/" + encode(projectId) + "/repository/files/" + encode(filePath) + "/raw?ref=" + ref
+				+ "&sudo=" + username);
 	}
 
 	protected <R> List<R> getList(String apiEndPoint, TypeReference<List<R>> typeReference) {
@@ -129,9 +137,13 @@ public class GitLabClientImpl implements GitLabClient {
 
 	private void logException(Request.MethodType type, Map<String, String> uriVariables, String url, Exception e) {
 		if (e instanceof ResponseStatusException) {
-			LOG.error("API call {} '{}' {} failed with status {}: {}", type.name(), url,
-					uriVariables != null ? uriVariables : "",
-					((ResponseStatusException) e).getResponse().getStatusText(), e.getMessage());
+			Response response = ((ResponseStatusException) e).getResponse();
+			if (response.getStatusCode() == 404) {
+				LOG.debug("Resource '{}' not accessible", url);
+			} else {
+				LOG.error("API call {} '{}' {} failed with status {}: {}", type.name(), url,
+						uriVariables != null ? uriVariables : "", response.getStatusText(), e.getMessage());
+			}
 		} else if (e instanceof ResponseException) {
 			LOG.error("API call {} '{}' {} failed: {}", type.name(), url, uriVariables != null ? uriVariables : "",
 					e.getMessage());
@@ -141,8 +153,12 @@ public class GitLabClientImpl implements GitLabClient {
 	}
 
 	private void logErrorResponse(MethodType type, Map<String, String> uriVariables, String url, Response response) {
-		LOG.error("API call {} '{}' {} failed with status {}", type.name(), url,
-				uriVariables != null ? uriVariables : "", response.getStatusText());
+		if (response.getStatusCode() == 404) {
+			LOG.debug("Resource '{}' not accessible", url);
+		} else {
+			LOG.error("API call {} '{}' {} failed with status {}", type.name(), url,
+					uriVariables != null ? uriVariables : "", response.getStatusText());
+		}
 	}
 
 	private String encode(String text) {

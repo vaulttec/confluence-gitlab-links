@@ -47,7 +47,6 @@ public class CodeBlockMacro implements Macro {
 	@Override
 	public String execute(Map<String, String> parameters, String bodyContent, ConversionContext conversionContext)
 			throws MacroExecutionException {
-		System.out.println(parameters);
 		String url = parameters.get("url");
 		String language = parameters.getOrDefault("language", "java");
 		Boolean gutter = Boolean.valueOf(parameters.getOrDefault("gutter", "false"));
@@ -65,10 +64,10 @@ public class CodeBlockMacro implements Macro {
 		// First check URL
 		if (StringUtils.isNotEmpty(url)) {
 			Link link = gitlabClient.getLink(url);
-			context.put("link", link);
 			if (link.getType() == Type.FILE) {
+				context.put("link", link);
 
-				// Get file content as currrent authenticated Confluence user
+				// Get file content as current authenticated Confluence user
 				UserProfile userProfile = userManager.getRemoteUser();
 				String file = gitlabClient.getRawFile(link.getProject(), link.getName(), link.getBranch(),
 						userProfile.getUsername());

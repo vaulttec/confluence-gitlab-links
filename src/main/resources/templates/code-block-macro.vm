@@ -1,6 +1,6 @@
-<div class="code panel pdl" style="border-width: 1px;">
-	<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
-		#if( $link )
+#if( $link )
+	<div class="code panel pdl" style="border-width: 1px;">
+		<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
 			#set( $url = $link.url)
 			#set( $fileName = "'" + $link.fileName + "'" )
 			#if( $firstLine )
@@ -12,17 +12,14 @@
 				#end
 			#end
 			<a href="$url"><b>$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.file") $fileName ($link.branch) $i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.in_project") '$link.project'</b></a>
-		#else
-			<b>$i18n.getText($error)</b>
+		</div>
+		#if( $file )
+			<div class="codeContent panelContent pdl">
+				<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: $language; gutter: $gutter; first-line: $firstLine; theme: $theme;" data-theme="$theme">$file</pre>
+			</div>
 		#end
 	</div>
-	#if( $link )
-		<div class="codeContent panelContent pdl">
-			#if( $file )
-				<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: $language; gutter: $gutter; first-line: $firstLine; theme: $theme;" data-theme="$theme">$file</pre>
-			#else
-				<b>$i18n.getText($error)</b>
-			#end
-		</div>
-	#end
-</div>
+#else
+	#set( $macro = "Code Block")
+	#parse("templates/error.vm")
+#end
