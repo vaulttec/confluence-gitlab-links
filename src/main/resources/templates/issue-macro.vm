@@ -3,14 +3,19 @@
 #if ($link)
 	#if ($issue)
 		<span class="gl-issue#if ($issue.closed) closed#end">
-			<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
-			<a href="$!link.url">$link.group / $link.project #$issue.iid</a> - $issue.title
+			<a href="$!link.url">
+				<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
+				$link.group / $link.project #$issue.iid
+			</a>
+			- $issue.title
 			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($issue.closed)success#elseif($issue.active)current#{else}default#end">$issue.state</span>
 		</span>
 	#else
 		<div class="gl-issue">
-			<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
-			<a href="$link.url">$link.group / $link.project #$link.name</a>
+			<a href="$link.url">
+				<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
+				$link.group / $link.project #$link.name
+			</a>
 		</div>
 	#end
 #else

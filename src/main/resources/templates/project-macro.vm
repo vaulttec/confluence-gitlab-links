@@ -2,8 +2,10 @@
 
 #if ($link)
 	<span class="gl-project">
-		<span class="aui-icon aui-icon-small aui-iconfont-document"></span>
-		<a href="$link.url">$link.group / $link.name</a>
+		<a href="$link.url">
+			<span class="aui-icon aui-icon-small aui-iconfont-document"></span>
+			$link.group / $link.name
+		</a>
 	</span>
 #else
 	#set ($macro = "Project")

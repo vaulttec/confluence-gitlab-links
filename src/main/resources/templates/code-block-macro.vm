@@ -11,7 +11,15 @@
 					#set ($fileName = $fileName + "-" + $lastLine)
 				#end
 			#end
-			<a href="$url"><b>$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.file") $fileName ($link.branch) $i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.in_project") '$link.project'</b></a>
+			<a href="$url">
+				<span class="aui-icon aui-icon-small aui-iconfont-file"></span>
+				<b>
+					$fileName
+					($link.branch)
+					$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.in_project")
+					'$link.project'
+				</b>
+			</a>
 		</div>
 		#if ($file)
 			<div class="codeContent panelContent pdl">

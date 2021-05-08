@@ -6,6 +6,9 @@
     line-height: 20px;
     white-space: normal;
 }
+.gl-group .aui-iconfont-documents {
+	color: #505F79;
+}
 
 .gl-project {
     background: #ebecf0;
@@ -14,6 +17,9 @@
     display: inline-block;
     line-height: 20px;
     white-space: normal;
+}
+.gl-project .aui-iconfont-document {
+	color: #505F79;
 }
 
 .gl-issue {
@@ -24,8 +30,14 @@
     line-height: 20px;
     white-space: normal;
 }
- 
+.gl-issue .aui-iconfont-issue {
+	color: #505F79;
+}
 .gl-issue .aui-lozenge {
     margin-left: 2px;
     vertical-align: text-top;
+}
+
+.code .aui-iconfont-file {
+	color: #505F79;
 }
