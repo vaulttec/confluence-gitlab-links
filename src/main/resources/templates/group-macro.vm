@@ -1,0 +1,11 @@
+#requireResource ("org.vaulttec.confluence-gitlab-link:gitlab-link-resources")
+
+#if ($link)
+	<span class="gl-group">
+		<span class="aui-icon aui-icon-small aui-iconfont-documents"></span>
+		<a href="$link.url">$link.group</a>
+	</span>
+#else
+	#set ($macro = "Group")
+	#parse ("templates/error.vm")
+#end

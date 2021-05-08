@@ -31,12 +31,12 @@ import com.atlassian.confluence.renderer.radeox.macros.MacroUtils;
 import com.atlassian.confluence.util.velocity.VelocityUtils;
 import com.atlassian.sal.api.user.UserManager;
 
-public class ProjectMacro implements Macro {
+public class GroupMacro implements Macro {
 
 	private final UserManager userManager;
 	private final GitLabClient gitlabClient;
 
-	public ProjectMacro(UserManager userManager, GitLabClient gitlabClient) {
+	public GroupMacro(UserManager userManager, GitLabClient gitlabClient) {
 		this.userManager = userManager;
 		this.gitlabClient = gitlabClient;
 	}
@@ -50,15 +50,15 @@ public class ProjectMacro implements Macro {
 		// First check URL
 		if (StringUtils.isNotEmpty(url)) {
 			Link link = gitlabClient.getLink(url);
-			if (link.getType() == Type.PROJECT) {
+			if (link.getType() == Type.GROUP) {
 				context.put("link", link);
 			} else {
-				context.put("error", "org.vaulttec.confluence-gitlab-link.project.macro.error.invalid_url");
+				context.put("error", "org.vaulttec.confluence-gitlab-link.group.macro.error.invalid_url");
 			}
 		} else {
-			context.put("error", "org.vaulttec.confluence-gitlab-link.project.macro.error.no_url");
+			context.put("error", "org.vaulttec.confluence-gitlab-link.group.macro.error.no_url");
 		}
-		return VelocityUtils.getRenderedTemplate("templates/project-macro.vm", context);
+		return VelocityUtils.getRenderedTemplate("templates/group-macro.vm", context);
 	}
 
 	@Override

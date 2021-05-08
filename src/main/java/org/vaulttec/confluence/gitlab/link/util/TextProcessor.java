@@ -52,7 +52,7 @@ public class TextProcessor {
 
 	public String getText(int startLineNo) {
 		if (startLineNo > 0 && startLineNo <= getLineCount()) {
-			int start = lines.get(startLineNo - 1).getStart();
+			int start = lines.get(startLineNo - 1).start;
 			return text.substring(start);
 		}
 		return null;
@@ -60,8 +60,8 @@ public class TextProcessor {
 
 	public String getText(int startLineNo, int endLineNo) {
 		if (startLineNo > 0 && endLineNo >= startLineNo && endLineNo <= getLineCount()) {
-			int start = lines.get(startLineNo - 1).getStart();
-			int end = lines.get(endLineNo - 1).getEnd();
+			int start = lines.get(startLineNo - 1).start;
+			int end = lines.get(endLineNo - 1).end;
 			return text.substring(start, end);
 		}
 		return null;
@@ -74,14 +74,6 @@ public class TextProcessor {
 		public Line(int start, int end) {
 			this.start = start;
 			this.end = end;
-		}
-
-		public int getStart() {
-			return start;
-		}
-
-		public int getEnd() {
-			return end;
 		}
 	}
 }

@@ -1,40 +1,11 @@
-#requireResource("org.vaulttec.confluence-gitlab-link:gitlab-link-resources")
+#requireResource ("org.vaulttec.confluence-gitlab-link:gitlab-link-resources")
 
-#if( $link )
-	#if( $project )
-		<div class="project">
-			<div class="avatar">
-				#if( $project.getAvatarUrl() )
-					<img class="circle" src="$project.getAvatarUrl()" alt="Project Avatar" style="width:25px;height:25px;">
-				#else
-					<span class="circle">$project.getNameWithNamespace().substring(0,1).toUpperCase()</span>
-				#end
-			</div>
-			<div class="project-name"><a href="$!project.getWebUrl()">$project.getNameWithNamespace()</a>
-				<div class="project-details">
-					<span class="project-star">
-						<span class="aui-icon aui-icon-small aui-iconfont-star"></span> $project.getStarCount()
-					</span> |
-					<span class="project-fork">
-						<span class="aui-icon aui-icon-small aui-iconfont-devtools-fork"></span> $project.getForksCount()
-					</span>
-				</div>
-				<div class="project-tags">
-					#foreach($tag in $project.getTags())
-						<span class="label">$tag</span>
-					#end
-				</div>
-			</div>
-		</div>
-	#else
-		<div class="project">
-			<div class="avatar">
-				<span class="circle">$link.getName().substring(0,1).toUpperCase()</span>
-			</div>
-			<div class="project-name"><a href="$link.getUrl()">$link.getGroup() / $link.getName()</a></div>
-		</div>
-	#end
+#if ($link)
+	<span class="gl-project">
+		<span class="aui-icon aui-icon-small aui-iconfont-document"></span>
+		<a href="$link.url">$link.group / $link.name</a>
+	</span>
 #else
-	#set( $macro = "Project")
-	#parse("templates/error.vm")
+	#set ($macro = "Project")
+	#parse ("templates/error.vm")
 #end

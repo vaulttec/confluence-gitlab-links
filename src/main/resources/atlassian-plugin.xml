@@ -15,7 +15,19 @@
 	<rest key="rest" path="/api" version="1.0">
 		<description>Provides REST resources for this plugin.</description>
 	</rest>
-     
+
+	<xhtml-macro key="group" name="group" 
+		class="org.vaulttec.confluence.gitlab.link.macro.GroupMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
 	<xhtml-macro key="project" name="project" 
 		class="org.vaulttec.confluence.gitlab.link.macro.ProjectMacro" >
 		<category name="external-content" />
@@ -27,7 +39,19 @@
 			</parameter>
 		</parameters>
 	</xhtml-macro>
-    
+
+	<xhtml-macro key="issue" name="issue" 
+		class="org.vaulttec.confluence.gitlab.link.macro.IssueMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
 	<xhtml-macro key="code-block" name="code-block" 
 		class="org.vaulttec.confluence.gitlab.link.macro.CodeBlockMacro" >
 		<category name="external-content" />

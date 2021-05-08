@@ -51,6 +51,15 @@ public class Link {
 		if (type != Type.INVALID && type != Type.GROUP) {
 			String context = getContext();
 			int delimiter = context.indexOf("/-/");
+			return delimiter >= 0 ? context.substring(context.indexOf("/") + 1, delimiter) : context;
+		}
+		return null;
+	}
+
+	public String getGroupAndProject() {
+		if (type != Type.INVALID && type != Type.GROUP) {
+			String context = getContext();
+			int delimiter = context.indexOf("/-/");
 			return delimiter >= 0 ? context.substring(0, delimiter) : context;
 		}
 		return null;
@@ -84,6 +93,8 @@ public class Link {
 				return context.substring(context.indexOf("/-/tags/") + 8);
 			case RELEASE:
 				return context.substring(context.indexOf("/-/releases/") + 12);
+			case MILESTONE:
+				return context.substring(context.indexOf("/-/milestones/") + 14);
 			default:
 				break;
 			}
@@ -122,52 +133,58 @@ public class Link {
 
 	@Override
 	public String toString() {
-		return "Link [type=" + type + (type != Type.INVALID ? ", context=" + getContext() + ", name=" + getName() : "") + "]";
+		return "Link [type=" + type + (type != Type.INVALID ? ", context=" + getContext() + ", name=" + getName() : "")
+				+ "]";
 	}
 
 	private Type determineType() {
 		if (url != null && url.startsWith(serverUrl)) {
 			String context = getContext();
-			if (!context.contains("/")) {
-				return Type.GROUP;
-			}
-			if (!context.contains("/-/")) {
-				return Type.PROJECT;
-			}
-			if (context.contains("/-/tree/")) {
-				String name = context.substring(context.indexOf("/-/tree/") + 8);
-				if (name.contains("/")) {
-					return Type.FOLDER;
+			if (context.length() > 0) {
+				int segments = context.split("/").length;
+				if (segments == 1) {
+					return Type.GROUP;
 				}
-				return Type.BRANCH;
-			}
-			if (context.contains("/-/blob/")) {
-				return Type.FILE;
-			}
-			if (context.contains("/-/commit/")) {
-				return Type.COMMIT;
-			}
-			if (context.contains("/-/issues/")) {
-				return Type.ISSUE;
-			}
-			if (context.contains("/-/merge_requests/")) {
-				return Type.MERGE_REQUEST;
-			}
-			if (context.contains("/-/tags/")) {
-				return Type.TAG;
-			}
-			if (context.contains("/-/releases/")) {
-				return Type.RELEASE;
+				if (segments == 2) {
+					return Type.PROJECT;
+				}
+				if (context.contains("/-/tree/") && segments > 4) {
+					if (segments > 5) {
+						return Type.FOLDER;
+					}
+					return Type.BRANCH;
+				}
+				if (context.contains("/-/blob/") && segments > 5) {
+					return Type.FILE;
+				}
+				if (context.contains("/-/commit/") && segments == 5) {
+					return Type.COMMIT;
+				}
+				if (context.contains("/-/issues/") && segments == 5) {
+					return Type.ISSUE;
+				}
+				if (context.contains("/-/merge_requests/") && segments == 5) {
+					return Type.MERGE_REQUEST;
+				}
+				if (context.contains("/-/tags/") && segments == 5) {
+					return Type.TAG;
+				}
+				if (context.contains("/-/releases/") && segments == 5) {
+					return Type.RELEASE;
+				}
+				if (context.contains("/-/milestones/") && segments == 5) {
+					return Type.MILESTONE;
+				}
 			}
 		}
 		return Type.INVALID;
 	}
 
 	private String getContext() {
-		return url.substring(serverUrl.length() + 1);
+		return url.length() > serverUrl.length() ? url.substring(serverUrl.length() + 1) : "";
 	}
 
 	public enum Type {
-		INVALID, GROUP, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE
+		INVALID, GROUP, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE, MILESTONE
 	}
 }

@@ -16,8 +16,33 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 			if (uri.host === config.serverHost) {
 				let directoryParts = uri.directory.split('/');
 
+				// Group URL, e.g. https://gitlab.com/gitlab-org
+				if (directoryParts.length == 2) {
+					let macro = {
+						'name': 'group',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+				
+				// Project URL, e.g. https://gitlab.com/gitlab-org/gitlab
+				} else if (directoryParts.length == 3) {
+					let macro = {
+						'name': 'project',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+				
+				// Issue URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/issues/1
+				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
+					directoryParts[4] === "issues") {
+					let macro = {
+						'name': 'issue',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+				
 				// File URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/blob/master/VERSION
-				if (directoryParts.length >= 7 && directoryParts[3] === "-" &&
+				} else if (directoryParts.length >= 7 && directoryParts[3] === "-" &&
 					directoryParts[4] === "blob") {
 					let macro = {
 						'name': 'code-block',
@@ -30,14 +55,6 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 							macro.params.lastLine = lines[1];
 						}
 					}
-					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
-
-				// File URL, e.g. https://gitlab.com/gitlab-org/gitlab
-				} else if (directoryParts.length == 3) {
-					let macro = {
-						'name': 'project',
-						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
-					};
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
 				} else {
 					done();

@@ -64,39 +64,46 @@ public class CodeBlockMacro implements Macro {
 		// First check URL
 		if (StringUtils.isNotEmpty(url)) {
 			Link link = gitlabClient.getLink(url);
-			if (link.getType() == Type.FILE) {
+			if (link.getType() == Type.FILE && StringUtils.isNotEmpty(link.getName())) {
 				context.put("link", link);
 
 				// Get file content as current authenticated Confluence user
 				UserProfile userProfile = userManager.getRemoteUser();
-				String file = gitlabClient.getRawFile(link.getProject(), link.getName(), link.getBranch(),
-						userProfile.getUsername());
-				if (file != null) {
-					TextProcessor textProc = new TextProcessor(file);
+				if (userProfile != null) {
+					String file = gitlabClient.getRawFile(link.getGroupAndProject(), link.getName(), link.getBranch(),
+							userProfile.getUsername());
+					if (file != null) {
+						TextProcessor textProc = new TextProcessor(file);
 
-					// Now check line numbers
-					int firstLine;
-					if (StringUtils.isEmpty(firstLineText)) {
-						firstLine = 1;
-					} else {
-						NumberProcessor firstLineProc = new NumberProcessor(firstLineText);
-						firstLine = firstLineProc.getInt();
-					}
-					if (firstLine >= 1 && firstLine <= textProc.getLineCount()) {
-						int lastLine;
-						if (StringUtils.isEmpty(lastLineText)) {
-							lastLine = textProc.getLineCount();
+						// Now check line numbers
+						int firstLine;
+						if (StringUtils.isEmpty(firstLineText)) {
+							firstLine = 1;
 						} else {
-							NumberProcessor lastLineProc = new NumberProcessor(lastLineText);
-							lastLine = lastLineProc.getInt();
+							NumberProcessor firstLineProc = new NumberProcessor(firstLineText);
+							firstLine = firstLineProc.getInt();
 						}
-						if (lastLine >= 1 && lastLine >= firstLine && lastLine <= textProc.getLineCount()) {
-							context.put("file", textProc.getText(firstLine, lastLine));
+						if (firstLine >= 1 && firstLine <= textProc.getLineCount()) {
+							int lastLine;
+							if (StringUtils.isEmpty(lastLineText)) {
+								lastLine = textProc.getLineCount();
+							} else {
+								NumberProcessor lastLineProc = new NumberProcessor(lastLineText);
+								lastLine = lastLineProc.getInt();
+							}
+							if (lastLine >= 1 && lastLine >= firstLine && lastLine <= textProc.getLineCount()) {
+								context.put("file", textProc.getText(firstLine, lastLine));
+							} else {
+								context.put("error",
+										"org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_last_line");
+							}
 						} else {
-							context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_last_line");
+							context.put("error",
+									"org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_first_line");
 						}
 					} else {
-						context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_first_line");
+						context.put("error",
+								"org.vaulttec.confluence-gitlab-link.code-block.macro.error.not_accessible");
 					}
 				} else {
 					context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.not_accessible");

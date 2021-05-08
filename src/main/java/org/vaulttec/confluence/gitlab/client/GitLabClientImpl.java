@@ -31,8 +31,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vaulttec.confluence.gitlab.client.model.Issue;
 import org.vaulttec.confluence.gitlab.client.model.Link;
-import org.vaulttec.confluence.gitlab.client.model.Project;
 import org.vaulttec.confluence.gitlab.client.model.Version;
 import org.vaulttec.confluence.gitlab.link.config.ConfigStore;
 
@@ -74,9 +74,9 @@ public class GitLabClientImpl implements GitLabClient {
 	}
 
 	@Override
-	public Project getProject(String projectId, String username) {
-		LOG.debug("Get details of project '{}' for user '{}'", projectId, username);
-		return get("/projects/" + encode(projectId) + "?sudo=" + username, Project.class);
+	public Issue getIssue(String projectId, String issueId, String username) {
+		LOG.debug("Get details of issue '{}' in project '{}' for user '{}'", issueId, projectId, username);
+		return get("/projects/" + encode(projectId) + "/issues/" + issueId + "?sudo=" + username, Issue.class);
 	}
 
 	@Override
