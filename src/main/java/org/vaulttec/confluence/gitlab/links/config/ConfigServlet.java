@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.config;
+package org.vaulttec.confluence.gitlab.links.config;
 
 import java.io.IOException;
 import java.net.URI;
@@ -30,9 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vaulttec.confluence.gitlab.client.GitLabClient;
-import org.vaulttec.confluence.gitlab.client.model.Version;
-import org.vaulttec.confluence.gitlab.link.Constants;
+import org.vaulttec.confluence.gitlab.links.Constants;
+import org.vaulttec.confluence.gitlab.links.client.GitLabClient;
+import org.vaulttec.confluence.gitlab.links.client.model.Version;
 
 import com.atlassian.sal.api.auth.LoginUriProvider;
 import com.atlassian.sal.api.user.UserKey;

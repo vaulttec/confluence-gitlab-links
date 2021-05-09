@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,16 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.macro;
+package org.vaulttec.confluence.gitlab.links.macro;
 
 import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
-import org.vaulttec.confluence.gitlab.client.GitLabClient;
-import org.vaulttec.confluence.gitlab.client.model.Link;
-import org.vaulttec.confluence.gitlab.client.model.Link.Type;
-import org.vaulttec.confluence.gitlab.link.util.NumberProcessor;
-import org.vaulttec.confluence.gitlab.link.util.TextProcessor;
+import org.vaulttec.confluence.gitlab.links.client.GitLabClient;
+import org.vaulttec.confluence.gitlab.links.client.model.Link;
+import org.vaulttec.confluence.gitlab.links.client.model.Link.Type;
+import org.vaulttec.confluence.gitlab.links.util.NumberProcessor;
+import org.vaulttec.confluence.gitlab.links.util.TextProcessor;
 
 import com.atlassian.confluence.content.render.xhtml.ConversionContext;
 import com.atlassian.confluence.macro.Macro;
@@ -95,24 +95,24 @@ public class CodeBlockMacro implements Macro {
 								context.put("file", textProc.getText(firstLine, lastLine));
 							} else {
 								context.put("error",
-										"org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_last_line");
+										"org.vaulttec.confluence-gitlab-links.code-block.macro.error.invalid_last_line");
 							}
 						} else {
 							context.put("error",
-									"org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_first_line");
+									"org.vaulttec.confluence-gitlab-links.code-block.macro.error.invalid_first_line");
 						}
 					} else {
 						context.put("error",
-								"org.vaulttec.confluence-gitlab-link.code-block.macro.error.not_accessible");
+								"org.vaulttec.confluence-gitlab-links.code-block.macro.error.not_accessible");
 					}
 				} else {
-					context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.not_accessible");
+					context.put("error", "org.vaulttec.confluence-gitlab-links.code-block.macro.error.not_accessible");
 				}
 			} else {
-				context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.invalid_url");
+				context.put("error", "org.vaulttec.confluence-gitlab-links.code-block.macro.error.invalid_url");
 			}
 		} else {
-			context.put("error", "org.vaulttec.confluence-gitlab-link.code-block.macro.error.no_url");
+			context.put("error", "org.vaulttec.confluence-gitlab-links.code-block.macro.error.no_url");
 		}
 		return VelocityUtils.getRenderedTemplate("templates/code-block-macro.vm", context);
 	}

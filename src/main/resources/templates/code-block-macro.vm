@@ -1,8 +1,8 @@
 #if ($link)
-	<div class="gl-code panel pdl" style="border-width: 1px;">
+	<div class="code panel pdl" style="border-width: 1px;">
 		<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
-			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
-			$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.file")
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.code-block.macro.file")
 			<a href="$url">
 				$link.name
 			</a>

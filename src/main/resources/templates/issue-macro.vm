@@ -1,17 +1,17 @@
-#requireResource ("org.vaulttec.confluence-gitlab-link:gitlab-link-resources")
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
 
 #if ($link)
 	#if ($issue)
 		<span class="gl-issue#if ($issue.closed) closed#end">
-			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
-			$i18n.getText("org.vaulttec.confluence-gitlab-link.issue.macro.issue")
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.issue.macro.issue")
 			<a href="$!link.url">#$link.name</a>
 			- $issue.title
 			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($issue.closed)success#elseif($issue.active)current#{else}default#end">$issue.state</span>
 		</span>
 	#else
 		<div class="gl-issue">
-			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
 			Issue
 			<a href="$link.url">#$link.name</a>
 		</div>

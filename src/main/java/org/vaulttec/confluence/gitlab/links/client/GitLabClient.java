@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,21 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.config;
+package org.vaulttec.confluence.gitlab.links.client;
 
-/**
- * Interface for storing Plugin Configuration. Implementations can decide if
- * they should be backed by a persistent store or not.
- */
-public interface ConfigStore {
+import org.vaulttec.confluence.gitlab.links.client.model.Issue;
+import org.vaulttec.confluence.gitlab.links.client.model.Link;
+import org.vaulttec.confluence.gitlab.links.client.model.Version;
+
+public interface GitLabClient {
 	String getServerUrl();
-	void setServerUrl(String url);
-
-	String getApiUrl();
-
-	String getApiKey();
-	void setApiKey(String key);
-
-	String getDefaultTheme();
-	void setDefaultTheme(String theme);
+	Link getLink(String url);
+	Version getVersion();
+	Issue getIssue(String projectId, String issueId, String username);
+	String getRawFile(String projectId, String filePath, String ref, String username);
 }

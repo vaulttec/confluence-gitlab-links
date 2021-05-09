@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.client;
+package org.vaulttec.confluence.gitlab.links.client;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -31,10 +31,10 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vaulttec.confluence.gitlab.client.model.Issue;
-import org.vaulttec.confluence.gitlab.client.model.Link;
-import org.vaulttec.confluence.gitlab.client.model.Version;
-import org.vaulttec.confluence.gitlab.link.config.ConfigStore;
+import org.vaulttec.confluence.gitlab.links.client.model.Issue;
+import org.vaulttec.confluence.gitlab.links.client.model.Link;
+import org.vaulttec.confluence.gitlab.links.client.model.Version;
+import org.vaulttec.confluence.gitlab.links.config.ConfigStore;
 
 import com.atlassian.sal.api.net.Request;
 import com.atlassian.sal.api.net.Request.MethodType;

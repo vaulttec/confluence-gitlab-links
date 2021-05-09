@@ -6,7 +6,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.vaulttec</groupId>
-    <artifactId>confluence-gitlab-link</artifactId>
+    <artifactId>confluence-gitlab-links</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
     <organization>
@@ -14,8 +14,8 @@
         <url>http://vaulttec.org/</url>
     </organization>
 
-    <name>GitLab Link for Confluence</name>
-    <description>This is the org.vaulttec:confluence-gitlab-link plugin for Atlassian Confluence.</description>
+    <name>GitLab Links for Confluence</name>
+    <description>This Confluence plugin provides special rendering of GitLab URLs.</description>
     <packaging>atlassian-plugin</packaging>
 
     <dependencies>
@@ -120,7 +120,7 @@
 
                         <!-- Add package to export here -->
                         <Export-Package>
-                            org.vaulttec.confluence.gitlab.link.api
+                            org.vaulttec.confluence.gitlab.links.api
                         </Export-Package>
 
                         <!-- Add package import here -->

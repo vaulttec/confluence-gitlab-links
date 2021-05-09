@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.client.model;
+package org.vaulttec.confluence.gitlab.links.client.model;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

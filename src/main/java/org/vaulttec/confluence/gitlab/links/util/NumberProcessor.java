@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,16 +15,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.client;
+package org.vaulttec.confluence.gitlab.links.util;
 
-import org.vaulttec.confluence.gitlab.client.model.Issue;
-import org.vaulttec.confluence.gitlab.client.model.Link;
-import org.vaulttec.confluence.gitlab.client.model.Version;
+public class NumberProcessor {
 
-public interface GitLabClient {
-	String getServerUrl();
-	Link getLink(String url);
-	Version getVersion();
-	Issue getIssue(String projectId, String issueId, String username);
-	String getRawFile(String projectId, String filePath, String ref, String username);
+	private Integer integer = null;
+
+	public NumberProcessor(String text) {
+		try {
+			this.integer = Integer.valueOf(text);
+		} catch (NumberFormatException e) {
+			// ignore
+		}
+	}
+
+	public boolean isValid() {
+		return integer != null;
+	}
+
+	public int getInt() {
+		return integer != null ? integer.intValue() : -1;
+	}
 }

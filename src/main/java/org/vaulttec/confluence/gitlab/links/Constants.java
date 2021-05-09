@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,10 +15,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link;
+package org.vaulttec.confluence.gitlab.links;
 
 public class Constants {
-	public static final String PLUGIN_STORAGE_KEY = "org.vaulttec.confluence.gitlab.link";
+	public static final String PLUGIN_STORAGE_KEY = "org.vaulttec.confluence.gitlab.links";
 
 	public static final String KEY_SERVER_URL = "serverUrl";
 	public static final String KEY_API_KEY = "apiKey";

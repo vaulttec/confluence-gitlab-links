@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,25 +15,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.util;
+package org.vaulttec.confluence.gitlab.links.config;
 
-public class NumberProcessor {
+/**
+ * Interface for storing Plugin Configuration. Implementations can decide if
+ * they should be backed by a persistent store or not.
+ */
+public interface ConfigStore {
+	String getServerUrl();
+	void setServerUrl(String url);
 
-	private Integer integer = null;
+	String getApiUrl();
 
-	public NumberProcessor(String text) {
-		try {
-			this.integer = Integer.valueOf(text);
-		} catch (NumberFormatException e) {
-			// ignore
-		}
-	}
+	String getApiKey();
+	void setApiKey(String key);
 
-	public boolean isValid() {
-		return integer != null;
-	}
-
-	public int getInt() {
-		return integer != null ? integer.intValue() : -1;
-	}
+	String getDefaultTheme();
+	void setDefaultTheme(String theme);
 }

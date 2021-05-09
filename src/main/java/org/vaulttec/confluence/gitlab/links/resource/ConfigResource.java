@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.resource;
+package org.vaulttec.confluence.gitlab.links.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -29,14 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.vaulttec.confluence.gitlab.link.config.ConfigStore;
+import org.vaulttec.confluence.gitlab.links.config.ConfigStore;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 
 /**
  * REST API for accessing current config settings.
  * <p>
- * This API is used e.g in "autoconvert-gitlab-link.js".
+ * This API is used e.g in "autoconvert-gitlab-links.js".
  */
 @Path("/config")
 public class ConfigResource {

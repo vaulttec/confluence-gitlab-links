@@ -1,5 +1,5 @@
 /*
- * GitLab Link for Confluence
+ * GitLab Links for Confluence
  * Copyright (c) 2021 Torsten Juergeleit
  * mailto:torsten AT vaulttec DOT org
  *
@@ -15,9 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.vaulttec.confluence.gitlab.link.config;
+package org.vaulttec.confluence.gitlab.links.config;
 
-import org.vaulttec.confluence.gitlab.link.Constants;
+import org.vaulttec.confluence.gitlab.links.Constants;
 
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 

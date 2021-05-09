@@ -5,19 +5,19 @@
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="plugin-icon">images/pluginIcon.png</param>
         <param name="plugin-logo">images/pluginLogo.png</param>
-		<param name="configure.url">/plugins/servlet/gitlab-link/configurePlugin.action</param>
+		<param name="configure.url">/plugins/servlet/gitlab-links/configurePlugin.action</param>
         <param name="atlassian-data-center-status">compatible</param>
         <param name="atlassian-data-center-compatible">true</param>
     </plugin-info>
 
-	<resource type="i18n" name="i18n" location="confluence-gitlab-link" />
+	<resource type="i18n" name="i18n" location="confluence-gitlab-links" />
 
 	<rest key="rest" path="/api" version="1.0">
 		<description>Provides REST resources for this plugin.</description>
 	</rest>
 
 	<xhtml-macro key="project" name="project" 
-		class="org.vaulttec.confluence.gitlab.link.macro.ProjectMacro" >
+		class="org.vaulttec.confluence.gitlab.links.macro.ProjectMacro" >
 		<category name="external-content" />
 		<parameters>
 			<parameter name="url" type="string" default=""
@@ -29,7 +29,7 @@
 	</xhtml-macro>
 
 	<xhtml-macro key="issue" name="issue" 
-		class="org.vaulttec.confluence.gitlab.link.macro.IssueMacro" >
+		class="org.vaulttec.confluence.gitlab.links.macro.IssueMacro" >
 		<category name="external-content" />
 		<parameters>
 			<parameter name="url" type="string" default=""
@@ -41,7 +41,7 @@
 	</xhtml-macro>
 
 	<xhtml-macro key="code-block" name="code-block" 
-		class="org.vaulttec.confluence.gitlab.link.macro.CodeBlockMacro" >
+		class="org.vaulttec.confluence.gitlab.links.macro.CodeBlockMacro" >
 		<category name="external-content" />
 		<parameters>
 			<parameter name="url" type="string" default=""
@@ -106,27 +106,27 @@
 	</xhtml-macro>
 
 	<servlet key="config-servlet" name="Config Servlet"
-		 class="org.vaulttec.confluence.gitlab.link.config.ConfigServlet">
-		<url-pattern>/gitlab-link/configurePlugin.action</url-pattern>
+		 class="org.vaulttec.confluence.gitlab.links.config.ConfigServlet">
+		<url-pattern>/gitlab-links/configurePlugin.action</url-pattern>
 	</servlet>
 	<web-item key="config-menu-item" name="Configuration Link" section="system.admin/configuration" weight="100">
-		<description>Gitlab Link Configuration</description>
-		<label key="org.vaulttec.confluence-gitlab-link.config.title" />
-		<link linkId="config">/plugins/servlet/gitlab-link/configurePlugin.action</link>
+		<description>Gitlab Links Configuration</description>
+		<label key="org.vaulttec.confluence-gitlab-links.config.title" />
+		<link linkId="config">/plugins/servlet/gitlab-links/configurePlugin.action</link>
 	</web-item>
 
-	<web-resource key="gitlab-link-resources" name="GitLab Link Web Resources">
+	<web-resource key="gitlab-links-resources" name="GitLab Links Web Resources">
 		<dependency>com.atlassian.auiplugin:ajs</dependency>
-		<resource type="download" name="confluence-gitlab-link.css"
-			location="/css/confluence-gitlab-link.css" />
+		<resource type="download" name="confluence-gitlab-links.css"
+			location="/css/confluence-gitlab-links.css" />
 		<resource type="download" name="images/" location="/images" />
-		<context>gitlab-link</context>
+		<context>gitlab-links</context>
 	</web-resource>
 
-	<web-resource key="autoconvert-gitlab-link" name="Autoconvert GitLab link to macro">
+	<web-resource key="autoconvert-gitlab-links" name="Autoconvert GitLab links to macro">
 		<description>Changes GitLab URLs pasted into a macro</description>
-		<resource type="download" name="autoconvert-gitlab-link.js"
-			location="js/autoconvert-gitlab-link.js" />
+		<resource type="download" name="autoconvert-gitlab-links.js"
+			location="js/autoconvert-gitlab-links.js" />
 		<dependency>com.atlassian.confluence.plugins.confluence-paste:autoconvert-core</dependency>
 		<dependency>com.atlassian.auiplugin:ajs</dependency>
 		<context>editor</context>
