@@ -3,19 +3,17 @@
 #if ($link)
 	#if ($issue)
 		<span class="gl-issue#if ($issue.closed) closed#end">
-			<a href="$!link.url">
-				<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
-				$link.group / $link.project #$issue.iid
-			</a>
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-link.issue.macro.issue")
+			<a href="$!link.url">#$link.name</a>
 			- $issue.title
 			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($issue.closed)success#elseif($issue.active)current#{else}default#end">$issue.state</span>
 		</span>
 	#else
 		<div class="gl-issue">
-			<a href="$link.url">
-				<span class="aui-icon aui-icon-small aui-iconfont-issue"></span>
-				$link.group / $link.project #$link.name
-			</a>
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
+			Issue
+			<a href="$link.url">#$link.name</a>
 		</div>
 	#end
 #else

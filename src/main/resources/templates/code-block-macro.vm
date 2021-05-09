@@ -1,24 +1,10 @@
 #if ($link)
-	<div class="code panel pdl" style="border-width: 1px;">
+	<div class="gl-code panel pdl" style="border-width: 1px;">
 		<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
-			#set ($url = $link.url)
-			#set ($fileName = "'" + $link.fileName + "'")
-			#if ($firstLine )
-				#set ($url = $url + "#L" + $firstLine)
-				#set ($fileName = $fileName + " L" + $firstLine)
-				#if ($lastLine )
-					#set ($url = $url + "-" + $lastLine)
-					#set ($fileName = $fileName + "-" + $lastLine)
-				#end
-			#end
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.file")
 			<a href="$url">
-				<span class="aui-icon aui-icon-small aui-iconfont-file"></span>
-				<b>
-					$fileName
-					($link.branch)
-					$i18n.getText("org.vaulttec.confluence-gitlab-link.code-block.macro.in_project")
-					'$link.project'
-				</b>
+				$link.name
 			</a>
 		</div>
 		#if ($file)

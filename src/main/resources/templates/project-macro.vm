@@ -2,8 +2,9 @@
 
 #if ($link)
 	<span class="gl-project">
+		<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-link:gitlab-link-resources/images/gitlab-logo.png"/>
+		$i18n.getText("org.vaulttec.confluence-gitlab-link.project.macro.project")
 		<a href="$link.url">
-			<span class="aui-icon aui-icon-small aui-iconfont-document"></span>
 			$link.group / $link.name
 		</a>
 	</span>

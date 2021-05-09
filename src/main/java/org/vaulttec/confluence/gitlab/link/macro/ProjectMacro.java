@@ -29,15 +29,12 @@ import com.atlassian.confluence.macro.Macro;
 import com.atlassian.confluence.macro.MacroExecutionException;
 import com.atlassian.confluence.renderer.radeox.macros.MacroUtils;
 import com.atlassian.confluence.util.velocity.VelocityUtils;
-import com.atlassian.sal.api.user.UserManager;
 
 public class ProjectMacro implements Macro {
 
-	private final UserManager userManager;
 	private final GitLabClient gitlabClient;
 
-	public ProjectMacro(UserManager userManager, GitLabClient gitlabClient) {
-		this.userManager = userManager;
+	public ProjectMacro(GitLabClient gitlabClient) {
 		this.gitlabClient = gitlabClient;
 	}
 

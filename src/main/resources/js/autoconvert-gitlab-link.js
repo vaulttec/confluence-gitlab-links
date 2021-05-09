@@ -16,16 +16,8 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 			if (uri.host === config.serverHost) {
 				let directoryParts = uri.directory.split('/');
 
-				// Group URL, e.g. https://gitlab.com/gitlab-org
-				if (directoryParts.length == 2) {
-					let macro = {
-						'name': 'group',
-						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
-					};
-					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
-				
 				// Project URL, e.g. https://gitlab.com/gitlab-org/gitlab
-				} else if (directoryParts.length == 3) {
+				if (directoryParts.length == 3) {
 					let macro = {
 						'name': 'project',
 						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
