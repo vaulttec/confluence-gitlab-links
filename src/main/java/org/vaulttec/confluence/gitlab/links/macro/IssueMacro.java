@@ -58,20 +58,21 @@ public class IssueMacro implements Macro {
 				// Get issue details as current authenticated Confluence user
 				UserProfile userProfile = userManager.getRemoteUser();
 				if (userProfile != null) {
-					Issue issue = gitlabClient.getIssue(link.getGroupAndProject(), link.getName(), userProfile.getUsername());
+					Issue issue = gitlabClient.getIssue(link.getGroupAndProject(), link.getName(),
+							userProfile.getUsername());
 					if (issue != null) {
 						context.put("issue", issue);
 					} else {
-						context.put("error", "org.vaulttec.confluence-gitlab-links.project.macro.error.not_accessible");
+						context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.not_accessible");
 					}
 				} else {
-					context.put("error", "org.vaulttec.confluence-gitlab-links.project.macro.error.not_accessible");
+					context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.not_accessible");
 				}
 			} else {
-				context.put("error", "org.vaulttec.confluence-gitlab-links.project.macro.error.invalid_url");
+				context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.invalid_url");
 			}
 		} else {
-			context.put("error", "org.vaulttec.confluence-gitlab-links.project.macro.error.no_url");
+			context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.no_url");
 		}
 		return VelocityUtils.getRenderedTemplate("templates/issue-macro.vm", context);
 	}
