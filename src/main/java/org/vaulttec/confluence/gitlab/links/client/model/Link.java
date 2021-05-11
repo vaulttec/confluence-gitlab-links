@@ -39,16 +39,13 @@ public class Link {
 	public String getGroup() {
 		if (type != Type.INVALID) {
 			String context = getContext();
-			if (type == Type.GROUP) {
-				return context;
-			}
 			return context.substring(0, context.indexOf("/"));
 		}
 		return null;
 	}
 
 	public String getProject() {
-		if (type != Type.INVALID && type != Type.GROUP) {
+		if (type != Type.INVALID) {
 			String context = getContext();
 			int delimiter = context.indexOf("/-/");
 			return delimiter >= 0 ? context.substring(context.indexOf("/") + 1, delimiter) : context;
@@ -57,7 +54,7 @@ public class Link {
 	}
 
 	public String getGroupAndProject() {
-		if (type != Type.INVALID && type != Type.GROUP) {
+		if (type != Type.INVALID) {
 			String context = getContext();
 			int delimiter = context.indexOf("/-/");
 			return delimiter >= 0 ? context.substring(0, delimiter) : context;
@@ -69,8 +66,6 @@ public class Link {
 		if (type != Type.INVALID) {
 			String context = getContext();
 			switch (type) {
-			case GROUP:
-				return context;
 			case PROJECT:
 				return context.substring(context.indexOf("/") + 1);
 			case BRANCH:
@@ -142,9 +137,6 @@ public class Link {
 			String context = getContext();
 			if (context.length() > 0) {
 				int segments = context.split("/").length;
-				if (segments == 1) {
-					return Type.GROUP;
-				}
 				if (segments == 2) {
 					return Type.PROJECT;
 				}
@@ -185,6 +177,6 @@ public class Link {
 	}
 
 	public enum Type {
-		INVALID, GROUP, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE, MILESTONE
+		INVALID, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE, MILESTONE
 	}
 }
