@@ -1,0 +1,22 @@
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
+
+#if ($link)
+	#if ($mergeRequest)
+		<span class="gl-merge-request#if ($mergeRequest.closed) closed#end">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.merge-request.macro.merge-request")
+			<a href="$!link.url">!$link.name</a>
+			- $mergeRequest.title
+			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($mergeRequest.closed)error#elseif($mergeRequest.merged)current#{else}success#end">$mergeRequest.state</span>
+		</span>
+	#else
+		<div class="gl-merge-request">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.merge-request.macro.merge-request")
+			<a href="$link.url">!$link.name</a>
+		</div>
+	#end
+#else
+	#set ($macro = "Merge Request")
+	#parse ("templates/error.vm")
+#end

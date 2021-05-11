@@ -4,15 +4,6 @@
     vertical-align: middle;
 }
 
-.gl-group {
-    background: #ebecf0;
-    padding: 1px 3px;
-    border-radius: 2px;
-    display: inline-block;
-    line-height: 20px;
-    white-space: normal;
-}
-
 .gl-project {
     background: #ebecf0;
     padding: 1px 3px;
@@ -31,6 +22,19 @@
     white-space: normal;
 }
 .gl-issue .aui-lozenge {
+    margin-left: 2px;
+    vertical-align: text-top;
+}
+
+.gl-merge-request {
+    background: #ebecf0;
+    padding: 1px 3px;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 20px;
+    white-space: normal;
+}
+.gl-merge-request .aui-lozenge {
     margin-left: 2px;
     vertical-align: text-top;
 }

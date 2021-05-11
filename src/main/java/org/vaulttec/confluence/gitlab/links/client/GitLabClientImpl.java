@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
+import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
 import org.vaulttec.confluence.gitlab.links.client.model.Version;
 import org.vaulttec.confluence.gitlab.links.config.ConfigStore;
 
@@ -77,6 +78,14 @@ public class GitLabClientImpl implements GitLabClient {
 	public Issue getIssue(String projectId, String issueId, String username) {
 		LOG.debug("Get details of issue '{}' in project '{}' for user '{}'", issueId, projectId, username);
 		return get("/projects/" + encode(projectId) + "/issues/" + issueId + "?sudo=" + username, Issue.class);
+	}
+
+	@Override
+	public MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username) {
+		LOG.debug("Get details of merge request '{}' in project '{}' for user '{}'", mergeRequestId, projectId,
+				username);
+		return get("/projects/" + encode(projectId) + "/merge_requests/" + mergeRequestId + "?sudo=" + username,
+				MergeRequest.class);
 	}
 
 	@Override

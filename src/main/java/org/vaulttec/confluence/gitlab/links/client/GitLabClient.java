@@ -19,6 +19,7 @@ package org.vaulttec.confluence.gitlab.links.client;
 
 import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
+import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
 import org.vaulttec.confluence.gitlab.links.client.model.Version;
 
 public interface GitLabClient {
@@ -26,5 +27,6 @@ public interface GitLabClient {
 	Link getLink(String url);
 	Version getVersion();
 	Issue getIssue(String projectId, String issueId, String username);
+	MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username);
 	String getRawFile(String projectId, String filePath, String ref, String username);
 }
