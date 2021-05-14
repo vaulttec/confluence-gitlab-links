@@ -9,14 +9,20 @@
     <artifactId>confluence-gitlab-links</artifactId>
     <version>1.0.0-SNAPSHOT</version>
 
+    <name>GitLab Links plugin for Confluence</name>
+    <description>This Confluence plugin provides special rendering of GitLab URLs.</description>
+    <packaging>atlassian-plugin</packaging>
+
     <organization>
         <name>VaultTec</name>
         <url>http://vaulttec.org/</url>
     </organization>
 
-    <name>GitLab Links for Confluence</name>
-    <description>This Confluence plugin provides special rendering of GitLab URLs.</description>
-    <packaging>atlassian-plugin</packaging>
+    <scm>
+        <url>https://github.com/vaulttec/confluence-gitlab-links</url>
+        <connection>scm:git:https://github.com/vaulttec/confluence-gitlab-links.git</connection>
+        <tag>HEAD</tag>
+    </scm>
 
     <dependencies>
         <dependency>
@@ -134,6 +140,14 @@
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+	            <version>3.0.0-M4</version>
+	            <configuration>
+	                <tagNameFormat>v@{project.version}</tagNameFormat>
+	            </configuration>
             </plugin>
         </plugins>
     </build>
