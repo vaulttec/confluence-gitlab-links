@@ -1,0 +1,26 @@
+name: Release
+
+on: 
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install Atlassian SDK
+        uses: rodrigo-nogues/github-action-install-atlassian-sdk@v1
+
+      - name: Build Plugin
+        run: atlas-package -B
+
+      - uses: ncipollo/release-action@v1
+        with:
+          body: GitLab Links Confluence Plugin for Atlassian Server and Data Center.
+          artifacts: "target/*.jar"
+          artifactContentType: application/jar
+          token: ${{ secrets.GITHUB_TOKEN }}

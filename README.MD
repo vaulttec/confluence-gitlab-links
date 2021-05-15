@@ -1,9 +1,12 @@
-You have successfully created an Atlassian Plugin!
+## GitLab Links Confluence Plugin for Atlassian Server and Data Center
 
-Here are the SDK commands you'll use immediately:
+[![Build](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml/badge.svg)](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml) [![Release](https://img.shields.io/github/release/vaulttec/confluence-gitlab-links.svg)](https://github.com/vaulttec/confluence-gitlab-links/releases/latest)
+
+
+
+Here are the SDK commands you can use:
 
 * atlas-run   -- installs this plugin into the product and starts it on localhost
-* atlas-debug -- same as atlas-run, but allows a debugger to attach at port 5005
 * atlas-help  -- prints description for all commands in the SDK
 
 Full documentation is always available at:
