@@ -59,14 +59,16 @@ public class MergeRequestMacro implements Macro {
 				UserProfile userProfile = userManager.getRemoteUser();
 				if (userProfile != null) {
 					MergeRequest mergeRequest = gitlabClient.getMergeRequest(link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername());
+							userProfile.getUsername(), link.isInGroup());
 					if (mergeRequest != null) {
 						context.put("mergeRequest", mergeRequest);
 					} else {
-						context.put("error", "org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
+						context.put("error",
+								"org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
 					}
 				} else {
-					context.put("error", "org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
+					context.put("error",
+							"org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
 				}
 			} else {
 				context.put("error", "org.vaulttec.confluence-gitlab-links.merge-request.macro.error.invalid_url");

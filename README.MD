@@ -1,6 +1,6 @@
 ## GitLab Links Confluence Plugin for Atlassian Server and Data Center
 
-[![Build](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml/badge.svg)](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml) [![Release](https://img.shields.io/github/release/vaulttec/confluence-gitlab-links.svg)](https://github.com/vaulttec/confluence-gitlab-links/releases/latest)
+[![build](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml/badge.svg)](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml) [![Release](https://img.shields.io/github/release/vaulttec/confluence-gitlab-links.svg)](https://github.com/vaulttec/confluence-gitlab-links/releases/latest)
 
 
 

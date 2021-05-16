@@ -24,9 +24,14 @@ import org.vaulttec.confluence.gitlab.links.client.model.Version;
 
 public interface GitLabClient {
 	String getServerUrl();
+
 	Link getLink(String url);
+
 	Version getVersion();
-	Issue getIssue(String projectId, String issueId, String username);
-	MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username);
+
+	Issue getIssue(String projectId, String issueId, String username, boolean isInGroup);
+
+	MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username, boolean isInGroup);
+
 	String getRawFile(String projectId, String filePath, String ref, String username);
 }

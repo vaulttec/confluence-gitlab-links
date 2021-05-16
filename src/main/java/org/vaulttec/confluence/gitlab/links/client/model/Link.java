@@ -36,6 +36,14 @@ public class Link {
 		return type;
 	}
 
+	public boolean isInGroup() {
+		if (type != Type.INVALID) {
+			String context = getContext();
+			return context.startsWith("groups/");
+		}
+		return false;
+	}
+
 	public String getGroup() {
 		if (type != Type.INVALID) {
 			String context = getContext();
@@ -48,7 +56,8 @@ public class Link {
 		if (type != Type.INVALID) {
 			String context = getContext();
 			int delimiter = context.indexOf("/-/");
-			return delimiter >= 0 ? context.substring(context.indexOf("/") + 1, delimiter) : context;
+			return delimiter >= 0 ? context.substring(context.indexOf("/") + 1, delimiter)
+					: context.substring(context.indexOf("/") + 1);
 		}
 		return null;
 	}

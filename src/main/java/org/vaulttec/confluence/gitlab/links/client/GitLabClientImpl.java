@@ -75,17 +75,19 @@ public class GitLabClientImpl implements GitLabClient {
 	}
 
 	@Override
-	public Issue getIssue(String projectId, String issueId, String username) {
-		LOG.debug("Get details of issue '{}' in project '{}' for user '{}'", issueId, projectId, username);
-		return get("/projects/" + encode(projectId) + "/issues/" + issueId + "?sudo=" + username, Issue.class);
+	public Issue getIssue(String projectId, String issueId, String username, boolean isInGroup) {
+		LOG.debug("Get details of issue '{}' in {} '{}' for user '{}'", issueId, (isInGroup ? "group" : "project"),
+				projectId, username);
+		return get((isInGroup ? "/groups/" : "/projects/") + encode(projectId) + "/issues/" + issueId + "?sudo="
+				+ username, Issue.class);
 	}
 
 	@Override
-	public MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username) {
-		LOG.debug("Get details of merge request '{}' in project '{}' for user '{}'", mergeRequestId, projectId,
-				username);
-		return get("/projects/" + encode(projectId) + "/merge_requests/" + mergeRequestId + "?sudo=" + username,
-				MergeRequest.class);
+	public MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username, boolean isInGroup) {
+		LOG.debug("Get details of merge request '{}' in {} '{}' for user '{}'", mergeRequestId,
+				(isInGroup ? "group" : "project"), projectId, username);
+		return get((isInGroup ? "/groups/" : "/projects/") + encode(projectId) + "/merge_requests/" + mergeRequestId
+				+ "?sudo=" + username, MergeRequest.class);
 	}
 
 	@Override

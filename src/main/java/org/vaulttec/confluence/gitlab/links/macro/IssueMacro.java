@@ -59,7 +59,7 @@ public class IssueMacro implements Macro {
 				UserProfile userProfile = userManager.getRemoteUser();
 				if (userProfile != null) {
 					Issue issue = gitlabClient.getIssue(link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername());
+							userProfile.getUsername(), link.isInGroup());
 					if (issue != null) {
 						context.put("issue", issue);
 					} else {
