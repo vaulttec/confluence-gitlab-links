@@ -1,0 +1,22 @@
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
+
+#if ($link)
+	#if ($milestone)
+		<span class="gl-milestone#if ($milestone.closed) closed#end">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.milestone.macro.milestone")
+			<a href="$!link.url">$link.name</a>
+			- $milestone.title
+			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($milestone.closed)error#elseif($milestone.active)success#{else}current#end">$milestone.state</span>
+		</span>
+	#else
+		<div class="gl-milestone">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.milestone.macro.milestone")
+			<a href="$link.url">$link.name</a>
+		</div>
+	#end
+#else
+	#set ($macro = "Milestone")
+	#parse ("templates/error.vm")
+#end

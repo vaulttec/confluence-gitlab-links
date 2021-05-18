@@ -23,7 +23,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.vaulttec.confluence.gitlab.links.client.GitLabClient;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
 import org.vaulttec.confluence.gitlab.links.client.model.Link.Type;
-import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
+import org.vaulttec.confluence.gitlab.links.client.model.Milestone;
 
 import com.atlassian.confluence.content.render.xhtml.ConversionContext;
 import com.atlassian.confluence.macro.Macro;
@@ -33,12 +33,12 @@ import com.atlassian.confluence.util.velocity.VelocityUtils;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
 
-public class MergeRequestMacro implements Macro {
+public class MilestoneMacro implements Macro {
 
 	private final UserManager userManager;
 	private final GitLabClient gitlabClient;
 
-	public MergeRequestMacro(UserManager userManager, GitLabClient gitlabClient) {
+	public MilestoneMacro(UserManager userManager, GitLabClient gitlabClient) {
 		this.userManager = userManager;
 		this.gitlabClient = gitlabClient;
 	}
@@ -52,31 +52,31 @@ public class MergeRequestMacro implements Macro {
 		// First check URL
 		if (StringUtils.isNotEmpty(url)) {
 			Link link = gitlabClient.getLink(url);
-			if (link.getType() == Type.MERGE_REQUEST && StringUtils.isNotEmpty(link.getName())) {
+			if (link.getType() == Type.MILESTONE && StringUtils.isNotEmpty(link.getName())) {
 				context.put("link", link);
 
-				// Get merge request details as current authenticated Confluence user
+				// Get milestone details as current authenticated Confluence user
 				UserProfile userProfile = userManager.getRemoteUser();
 				if (userProfile != null) {
-					MergeRequest mergeRequest = gitlabClient.getMergeRequest(link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername());
-					if (mergeRequest != null) {
-						context.put("mergeRequest", mergeRequest);
+					Milestone milestone = gitlabClient.getMilestone(
+							link.isInGroup() ? link.getProject() : link.getGroupAndProject(), link.getName(),
+							userProfile.getUsername(), link.isInGroup());
+					if (milestone != null) {
+						context.put("milestone", milestone);
 					} else {
 						context.put("error",
-								"org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
+								"org.vaulttec.confluence-gitlab-links.milestone.macro.error.not_accessible");
 					}
 				} else {
-					context.put("error",
-							"org.vaulttec.confluence-gitlab-links.merge-request.macro.error.not_accessible");
+					context.put("error", "org.vaulttec.confluence-gitlab-links.milestone.macro.error.not_accessible");
 				}
 			} else {
-				context.put("error", "org.vaulttec.confluence-gitlab-links.merge-request.macro.error.invalid_url");
+				context.put("error", "org.vaulttec.confluence-gitlab-links.milestone.macro.error.invalid_url");
 			}
 		} else {
-			context.put("error", "org.vaulttec.confluence-gitlab-links.merge-request.macro.error.no_url");
+			context.put("error", "org.vaulttec.confluence-gitlab-links.milestone.macro.error.no_url");
 		}
-		return VelocityUtils.getRenderedTemplate("templates/merge-request-macro.vm", context);
+		return VelocityUtils.getRenderedTemplate("templates/milestone-macro.vm", context);
 	}
 
 	@Override

@@ -28,6 +28,18 @@
 		</parameters>
 	</xhtml-macro>
 
+	<xhtml-macro key="issue" name="issue" 
+		class="org.vaulttec.confluence.gitlab.links.macro.IssueMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
 	<xhtml-macro key="merge-request" name="merge-request" 
 		class="org.vaulttec.confluence.gitlab.links.macro.MergeRequestMacro" >
 		<category name="external-content" />
@@ -40,8 +52,8 @@
 		</parameters>
 	</xhtml-macro>
 
-	<xhtml-macro key="issue" name="issue" 
-		class="org.vaulttec.confluence.gitlab.links.macro.IssueMacro" >
+	<xhtml-macro key="milestone" name="milestone" 
+		class="org.vaulttec.confluence.gitlab.links.macro.MilestoneMacro" >
 		<category name="external-content" />
 		<parameters>
 			<parameter name="url" type="string" default=""

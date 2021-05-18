@@ -34,6 +34,7 @@ import org.slf4j.LoggerFactory;
 import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
 import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
+import org.vaulttec.confluence.gitlab.links.client.model.Milestone;
 import org.vaulttec.confluence.gitlab.links.client.model.Version;
 import org.vaulttec.confluence.gitlab.links.config.ConfigStore;
 
@@ -49,6 +50,9 @@ public class GitLabClientImpl implements GitLabClient {
 	private static final Logger LOG = LoggerFactory.getLogger(GitLabClientImpl.class);
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper()
 			.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+	private static final TypeReference<List<Milestone>> RESPONSE_TYPE_MILESTONES = new TypeReference<List<Milestone>>() {
+	};
 
 	private final RequestFactory<?> requestFactory;
 	private final ConfigStore configStore;
@@ -75,19 +79,26 @@ public class GitLabClientImpl implements GitLabClient {
 	}
 
 	@Override
-	public Issue getIssue(String projectId, String issueId, String username, boolean isInGroup) {
-		LOG.debug("Get details of issue '{}' in {} '{}' for user '{}'", issueId, (isInGroup ? "group" : "project"),
-				projectId, username);
-		return get((isInGroup ? "/groups/" : "/projects/") + encode(projectId) + "/issues/" + issueId + "?sudo="
-				+ username, Issue.class);
+	public Issue getIssue(String projectId, String issueId, String username) {
+		LOG.debug("Get details of issue '{}' in project '{}' for user '{}'", issueId, projectId, username);
+		return get("/projects/" + encode(projectId) + "/issues/" + issueId + "?sudo=" + username, Issue.class);
 	}
 
 	@Override
-	public MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username, boolean isInGroup) {
-		LOG.debug("Get details of merge request '{}' in {} '{}' for user '{}'", mergeRequestId,
+	public MergeRequest getMergeRequest(String projectId, String mergeRequestId, String username) {
+		LOG.debug("Get details of merge request '{}' in project '{}' for user '{}'", mergeRequestId, projectId,
+				username);
+		return get("/projects/" + encode(projectId) + "/merge_requests/" + mergeRequestId + "?sudo=" + username,
+				MergeRequest.class);
+	}
+
+	@Override
+	public Milestone getMilestone(String projectId, String milestoneId, String username, boolean isInGroup) {
+		LOG.debug("Get details of milestone '{}' in {} '{}' for user '{}'", milestoneId,
 				(isInGroup ? "group" : "project"), projectId, username);
-		return get((isInGroup ? "/groups/" : "/projects/") + encode(projectId) + "/merge_requests/" + mergeRequestId
-				+ "?sudo=" + username, MergeRequest.class);
+		List<Milestone> milestones = getList((isInGroup ? "/groups/" : "/projects/") + encode(projectId)
+				+ "/milestones?iids[]=" + milestoneId + "&sudo=" + username, RESPONSE_TYPE_MILESTONES);
+		return milestones != null && !milestones.isEmpty() ? milestones.get(0) : null;
 	}
 
 	@Override

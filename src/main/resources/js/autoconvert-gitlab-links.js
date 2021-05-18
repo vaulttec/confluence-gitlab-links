@@ -41,6 +41,15 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
 					};
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+
+				// Milestone URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/milestones/1
+				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
+					directoryParts[4] === "milestones") {
+					let macro = {
+						'name': 'milestone',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
 				
 				// File URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/blob/master/VERSION
 				} else if (directoryParts.length >= 7 && directoryParts[3] === "-" &&

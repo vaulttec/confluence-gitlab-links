@@ -38,3 +38,16 @@
     margin-left: 2px;
     vertical-align: text-top;
 }
+
+.gl-milestone {
+    background: #ebecf0;
+    padding: 1px 3px;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 20px;
+    white-space: normal;
+}
+.gl-milestone .aui-lozenge {
+    margin-left: 2px;
+    vertical-align: text-top;
+}
