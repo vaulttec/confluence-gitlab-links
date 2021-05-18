@@ -3,6 +3,13 @@
 		<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
 			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
 			$i18n.getText("org.vaulttec.confluence-gitlab-links.code-block.macro.file")
+			#set ($url = $link.url)
+			#if ($firstLine )
+				#set ($url = $url + "#L" + $firstLine)
+				#if ($lastLine )
+					#set ($url = $url + "-" + $lastLine)
+				#end
+			#end
 			<a href="$url">
 				$link.name
 			</a>

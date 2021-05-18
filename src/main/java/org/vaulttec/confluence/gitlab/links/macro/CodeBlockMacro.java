@@ -57,8 +57,6 @@ public class CodeBlockMacro implements Macro {
 		Map<String, Object> context = MacroUtils.defaultVelocityContext();
 		context.put("language", language);
 		context.put("gutter", gutter);
-		context.put("firstLine", firstLineText);
-		context.put("lastLine", lastLineText);
 		context.put("theme", theme);
 
 		// First check URL
@@ -92,6 +90,8 @@ public class CodeBlockMacro implements Macro {
 								lastLine = lastLineProc.getInt();
 							}
 							if (lastLine >= 1 && lastLine >= firstLine && lastLine <= textProc.getLineCount()) {
+								context.put("firstLine", String.valueOf(firstLine));
+								context.put("lastLine", String.valueOf(lastLine));
 								context.put("file", textProc.getText(firstLine, lastLine));
 							} else {
 								context.put("error",
