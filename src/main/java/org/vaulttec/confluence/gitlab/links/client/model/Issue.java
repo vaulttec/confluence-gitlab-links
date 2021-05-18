@@ -75,10 +75,6 @@ public class Issue {
 		return "opened".equals(state);
 	}
 
-	public boolean isActive() {
-		return "active".equals(state);
-	}
-
 	public boolean isClosed() {
 		return "closed".equals(state);
 	}

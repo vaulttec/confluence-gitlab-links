@@ -7,7 +7,7 @@
 			$i18n.getText("org.vaulttec.confluence-gitlab-links.merge-request.macro.merge-request")
 			<a href="$!link.url">!$link.name</a>
 			- $mergeRequest.title
-			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($mergeRequest.closed)error#elseif($mergeRequest.merged)current#{else}success#end">$mergeRequest.state</span>
+			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($mergeRequest.closed)error#elseif($mergeRequest.merged)current#elseif($mergeRequest.opened)success#{else}default#end">$mergeRequest.state</span>
 		</span>
 	#else
 		<div class="gl-merge-request">

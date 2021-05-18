@@ -7,7 +7,7 @@
 			$i18n.getText("org.vaulttec.confluence-gitlab-links.issue.macro.issue")
 			<a href="$!link.url">#$link.name</a>
 			- $issue.title
-			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($issue.closed)current#elseif($issue.active)default#{else}success#end">$issue.state</span>
+			<span class="aui-lozenge aui-lozenge-subtle aui-lozenge-#if($issue.closed)current#elseif($issue.opened)success#{else}default#end">$issue.state</span>
 		</span>
 	#else
 		<div class="gl-issue">
