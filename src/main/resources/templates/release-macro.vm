@@ -1,0 +1,23 @@
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
+#set($dateFormatter=$action.dateFormatter)
+
+#if ($link)
+	#if ($release)
+		<span class="gl-release">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.release.macro.release")
+			<a href="$!link.url">$release.tagName</a>
+			- $release.name
+			($dateFormatter.format($release.releasedAt))
+		</span>
+	#else
+		<div class="gl-release">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.release.macro.release")
+			<a href="$link.url">$link.name</a>
+		</div>
+	#end
+#else
+	#set ($macro = "Release")
+	#parse ("templates/error.vm")
+#end

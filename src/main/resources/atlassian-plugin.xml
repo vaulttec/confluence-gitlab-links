@@ -64,6 +64,18 @@
 		</parameters>
 	</xhtml-macro>
 
+	<xhtml-macro key="release" name="release" 
+		class="org.vaulttec.confluence.gitlab.links.macro.ReleaseMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
 	<xhtml-macro key="code-block" name="code-block" 
 		class="org.vaulttec.confluence.gitlab.links.macro.CodeBlockMacro" >
 		<category name="external-content" />

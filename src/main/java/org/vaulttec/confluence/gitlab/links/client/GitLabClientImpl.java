@@ -35,6 +35,7 @@ import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
 import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
 import org.vaulttec.confluence.gitlab.links.client.model.Milestone;
+import org.vaulttec.confluence.gitlab.links.client.model.Release;
 import org.vaulttec.confluence.gitlab.links.client.model.Version;
 import org.vaulttec.confluence.gitlab.links.config.ConfigStore;
 
@@ -99,6 +100,12 @@ public class GitLabClientImpl implements GitLabClient {
 		List<Milestone> milestones = getList((isInGroup ? "/groups/" : "/projects/") + encode(projectId)
 				+ "/milestones?iids[]=" + milestoneId + "&sudo=" + username, RESPONSE_TYPE_MILESTONES);
 		return milestones != null && !milestones.isEmpty() ? milestones.get(0) : null;
+	}
+
+	@Override
+	public Release getRelease(String projectId, String tagName, String username) {
+		LOG.debug("Get details of release for tag '{}' in project '{}' for user '{}'", tagName, projectId, username);
+		return get("/projects/" + encode(projectId) + "/releases/" + tagName + "?sudo=" + username, Release.class);
 	}
 
 	@Override
