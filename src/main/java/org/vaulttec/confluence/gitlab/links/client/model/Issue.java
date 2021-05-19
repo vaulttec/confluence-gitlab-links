@@ -17,8 +17,6 @@
  */
 package org.vaulttec.confluence.gitlab.links.client.model;
 
-import java.util.Objects;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -66,32 +64,12 @@ public class Issue {
 		this.state = state;
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
-	}
-
 	public boolean isOpened() {
 		return "opened".equals(state);
 	}
 
 	public boolean isClosed() {
 		return "closed".equals(state);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Issue other = (Issue) obj;
-		return Objects.equals(id, other.id);
 	}
 
 	@Override
