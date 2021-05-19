@@ -22,6 +22,10 @@ public class Link {
 	private final String url;
 	private final Type type;
 
+	public enum Type {
+		INVALID, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE, MILESTONE
+	}
+
 	public Link(String serverUrl, String url) {
 		this.serverUrl = serverUrl;
 		this.url = url;
@@ -135,12 +139,6 @@ public class Link {
 		return null;
 	}
 
-	@Override
-	public String toString() {
-		return "Link [type=" + type + (type != Type.INVALID ? ", context=" + getContext() + ", name=" + getName() : "")
-				+ "]";
-	}
-
 	private Type determineType() {
 		if (url != null && url.startsWith(serverUrl)) {
 			String context = getContext();
@@ -185,7 +183,9 @@ public class Link {
 		return url.length() > serverUrl.length() ? url.substring(serverUrl.length() + 1) : "";
 	}
 
-	public enum Type {
-		INVALID, PROJECT, BRANCH, FOLDER, FILE, COMMIT, ISSUE, MERGE_REQUEST, TAG, RELEASE, MILESTONE
+	@Override
+	public String toString() {
+		return "Link [type=" + type + (type != Type.INVALID ? ", context=" + getContext() + ", name=" + getName() : "")
+				+ "]";
 	}
 }
