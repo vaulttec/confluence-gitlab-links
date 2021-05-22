@@ -16,16 +16,18 @@
 		<p>$i18n.getText("org.vaulttec.confluence-gitlab-links.config.error")</span></p>
 	</div>
 	#end
-	<form id="admin" class="aui long-label" method="POST" action="./configurePlugin.action">
+	<form id="admin" class="aui" method="POST" action="./configurePlugin.action">
 	    <div class="field-group">
 	        <label for="serverUrl">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.serverUrl")<span class="aui-icon icon-required">required</span></label>
-	        <input type="text" id="serverUrl" name="serverUrl" class="text long-field" value="$!serverUrl">
+	        <input type="text" id="serverUrl" name="serverUrl" class="text" value="$!serverUrl">
+	        <div class="description">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.serverUrlDescription")</div>
 			#if ($serverUrlError && $serverUrlError == 'error')<span class="error">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.serverUrlError")</span>#end
 	    </div>
 
 	    <div class="field-group">
 	        <label for="apiKey">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKey")</label>
-	        <input type="text" id="apiKey" name="apiKey" class="text long-field" value="$!apiKey">
+	        <input type="text" id="apiKey" name="apiKey" class="text" value="$!apiKey">
+	        <div class="description">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKeyDescription")</div>
 			#if ($apiKeyError && $apiKeyError == 'error')<span class="error">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKeyError")</span>#end
 	    </div>
 
@@ -36,6 +38,7 @@
 	        		<option #if ($theme.equals($defaultTheme))selected="true"#end value="$theme">$theme</option>
 	        	#end
 	        </select>
+	        <div class="description">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.defaultThemeDescription")</div>
 	    </div>
 
 	    <div class="buttons-container">
