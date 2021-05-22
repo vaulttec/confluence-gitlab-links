@@ -55,15 +55,20 @@ public class ReleaseMacro implements Macro {
 			if (link.getType() == Type.RELEASE && StringUtils.isNotEmpty(link.getName())) {
 				context.put("link", link);
 
-				// Get release details as current authenticated Confluence user
-				UserProfile userProfile = userManager.getRemoteUser();
-				if (userProfile != null) {
-					Release release = gitlabClient.getRelease(link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername());
-					if (release != null) {
-						context.put("release", release);
-					} else {
-						context.put("error", "org.vaulttec.confluence-gitlab-links.release.macro.error.not_accessible");
+				// Only access GitLab API if API key is provided
+				if (gitlabClient.hasApiKey()) {
+
+					// Get release details as current authenticated Confluence user
+					UserProfile userProfile = userManager.getRemoteUser();
+					if (userProfile != null) {
+						Release release = gitlabClient.getRelease(link.getGroupAndProject(), link.getName(),
+								userProfile.getUsername());
+						if (release != null) {
+							context.put("release", release);
+						} else {
+							context.put("error",
+									"org.vaulttec.confluence-gitlab-links.release.macro.error.not_accessible");
+						}
 					}
 				} else {
 					context.put("error", "org.vaulttec.confluence-gitlab-links.release.macro.error.not_accessible");

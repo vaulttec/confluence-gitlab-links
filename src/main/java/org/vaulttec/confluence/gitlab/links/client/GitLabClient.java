@@ -27,6 +27,8 @@ import org.vaulttec.confluence.gitlab.links.client.model.Version;
 public interface GitLabClient {
 	String getServerUrl();
 
+	boolean hasApiKey();
+
 	Link getLink(String url);
 
 	Version getVersion();

@@ -55,17 +55,21 @@ public class MilestoneMacro implements Macro {
 			if (link.getType() == Type.MILESTONE && StringUtils.isNotEmpty(link.getName())) {
 				context.put("link", link);
 
-				// Get milestone details as current authenticated Confluence user
-				UserProfile userProfile = userManager.getRemoteUser();
-				if (userProfile != null) {
-					Milestone milestone = gitlabClient.getMilestone(
-							link.isInGroup() ? link.getProject() : link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername(), link.isInGroup());
-					if (milestone != null) {
-						context.put("milestone", milestone);
-					} else {
-						context.put("error",
-								"org.vaulttec.confluence-gitlab-links.milestone.macro.error.not_accessible");
+				// Only access GitLab API if API key is provided
+				if (gitlabClient.hasApiKey()) {
+
+					// Get milestone details as current authenticated Confluence user
+					UserProfile userProfile = userManager.getRemoteUser();
+					if (userProfile != null) {
+						Milestone milestone = gitlabClient.getMilestone(
+								link.isInGroup() ? link.getProject() : link.getGroupAndProject(), link.getName(),
+								userProfile.getUsername(), link.isInGroup());
+						if (milestone != null) {
+							context.put("milestone", milestone);
+						} else {
+							context.put("error",
+									"org.vaulttec.confluence-gitlab-links.milestone.macro.error.not_accessible");
+						}
 					}
 				} else {
 					context.put("error", "org.vaulttec.confluence-gitlab-links.milestone.macro.error.not_accessible");

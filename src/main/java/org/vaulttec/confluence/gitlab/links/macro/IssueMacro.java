@@ -55,18 +55,23 @@ public class IssueMacro implements Macro {
 			if (link.getType() == Type.ISSUE && StringUtils.isNotEmpty(link.getName())) {
 				context.put("link", link);
 
-				// Get issue details as current authenticated Confluence user
-				UserProfile userProfile = userManager.getRemoteUser();
-				if (userProfile != null) {
-					Issue issue = gitlabClient.getIssue(link.getGroupAndProject(), link.getName(),
-							userProfile.getUsername());
-					if (issue != null) {
-						context.put("issue", issue);
+				// Only access GitLab API if API key is provided
+				if (gitlabClient.hasApiKey()) {
+
+					// Get issue details as current authenticated Confluence user
+					UserProfile userProfile = userManager.getRemoteUser();
+					if (userProfile != null) {
+						Issue issue = gitlabClient.getIssue(link.getGroupAndProject(), link.getName(),
+								userProfile.getUsername());
+						if (issue != null) {
+							context.put("issue", issue);
+						} else {
+							context.put("error",
+									"org.vaulttec.confluence-gitlab-links.issue.macro.error.not_accessible");
+						}
 					} else {
 						context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.not_accessible");
 					}
-				} else {
-					context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.not_accessible");
 				}
 			} else {
 				context.put("error", "org.vaulttec.confluence-gitlab-links.issue.macro.error.invalid_url");

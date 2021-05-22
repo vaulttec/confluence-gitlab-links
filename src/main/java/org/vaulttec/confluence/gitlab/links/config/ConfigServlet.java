@@ -107,22 +107,23 @@ public class ConfigServlet extends HttpServlet {
 
 		String key = StringUtils.trimToEmpty(request.getParameter(Constants.KEY_API_KEY));
 		context.put(Constants.KEY_API_KEY, key);
-		if (StringUtils.isNotEmpty(key)) {
-			configStore.setApiKey(key);
-		} else {
-			context.put(Constants.KEY_API_KEY + "Error", "error");
-			context.remove("success");
-		}
 
-		// Validate url and API key
-		if (context.containsKey("success")) {
-			LOG.debug("Checking GitLab Server at {}", url);
-			Version version = gitlabClient.getVersion();
-			if (version != null) {
-				LOG.info("GitLab Server {} version {} (revision {})", url, version.getVersion(), version.getRevision());
-			} else {
-				context.remove("success");
-				context.put("error", "error");
+		// Empty API key is allowed - in this case generic GitLab links are rendered 
+		configStore.setApiKey(key);
+
+		if (StringUtils.isNotEmpty(key)) {
+
+			// Validate url and API key
+			if (context.containsKey("success")) {
+				LOG.debug("Checking GitLab Server at {}", url);
+				Version version = gitlabClient.getVersion();
+				if (version != null) {
+					LOG.info("GitLab Server {} version {} (revision {})", url, version.getVersion(),
+							version.getRevision());
+				} else {
+					context.remove("success");
+					context.put("error", "error");
+				}
 			}
 		}
 

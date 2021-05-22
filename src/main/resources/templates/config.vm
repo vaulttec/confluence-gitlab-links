@@ -24,7 +24,7 @@
 	    </div>
 
 	    <div class="field-group">
-	        <label for="apiKey">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKey")<span class="aui-icon icon-required">required</span></label>
+	        <label for="apiKey">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKey")</label>
 	        <input type="text" id="apiKey" name="apiKey" class="text long-field" value="$!apiKey">
 			#if ($apiKeyError && $apiKeyError == 'error')<span class="error">$i18n.getText("org.vaulttec.confluence-gitlab-links.config.apiKeyError")</span>#end
 	    </div>
