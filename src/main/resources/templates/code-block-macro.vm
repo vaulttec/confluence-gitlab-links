@@ -1,25 +1,29 @@
 #if ($link)
-	<div class="code panel pdl" style="border-width: 1px;">
-		<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
-			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
-			$i18n.getText("org.vaulttec.confluence-gitlab-links.code-block.macro.file")
-			#set ($url = $link.url)
-			#if ($firstLine )
-				#set ($url = $url + "#L" + $firstLine)
-				#if ($lastLine )
-					#set ($url = $url + "-" + $lastLine)
-				#end
-			#end
-			<a href="$url">
-				$link.name
-			</a>
-		</div>
-		#if ($file)
+	#set ($url = $link.url)
+	#if ($firstLine )
+		#set ($url = $url + "#L" + $firstLine)
+		#if ($lastLine )
+			#set ($url = $url + "-" + $lastLine)
+		#end
+	#end
+	#if ($file)
+		<div class="code panel pdl" style="border-width: 1px;">
+			<div class="codeHeader panelHeader pdl" style="border-bottom-width: 1px;">
+				<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+				$i18n.getText("org.vaulttec.confluence-gitlab-links.code-block.macro.file")
+				<a href="$url">$link.name</a>
+			</div>
 			<div class="codeContent panelContent pdl">
 				<pre class="syntaxhighlighter-pre" data-syntaxhighlighter-params="brush: $language; gutter: $gutter; first-line: $firstLine; theme: $theme;" data-theme="$theme">$file</pre>
 			</div>
-		#end
-	</div>
+		</div>
+	#else
+		<div class="gl-code-block">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.code-block.macro.file")
+			<a href="$url">$link.name</a>
+		</div>
+	#end
 #else
 	#set ($macro = "Code Block")
 	#parse ("templates/error.vm")
