@@ -24,20 +24,29 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 					};
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
 				
-				// Issue URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/issues/1
-				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
-					directoryParts[4] === "issues") {
-					let macro = {
-						'name': 'issue',
-						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
-					};
-					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
-				
 				// Commit URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/commit/854885b5
 				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
 					directoryParts[4] === "commit") {
 					let macro = {
 						'name': 'commit',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+				
+				// Tag URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/tags/v1.0.0
+				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
+					directoryParts[4] === "tags") {
+					let macro = {
+						'name': 'tag',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+
+				// Issue URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/issues/1
+				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
+					directoryParts[4] === "issues") {
+					let macro = {
+						'name': 'issue',
 						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
 					};
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);

@@ -1,0 +1,12 @@
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
+
+#if ($link)
+	<span class="gl-tag">
+		<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+		$i18n.getText("org.vaulttec.confluence-gitlab-links.tag.macro.tag")
+		<a href="$link.url">$link.name</a>
+	</span>
+#else
+	#set ($macro = "Tag")
+	#parse ("templates/error.vm")
+#end
