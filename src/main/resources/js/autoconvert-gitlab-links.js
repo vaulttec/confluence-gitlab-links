@@ -32,6 +32,15 @@ define('org/vaulttec/gitlab-links', ['tinymce', 'ajs'], function(tinymce, AJS) {
 						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
 					};
 					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
+				
+				// Commit URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/commit/854885b5
+				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&
+					directoryParts[4] === "commit") {
+					let macro = {
+						'name': 'commit',
+						'params': { 'url': uri.protocol + '://' + uri.host + uri.path }
+					};
+					tinymce.plugins.Autoconvert.convertMacroToDom(macro, done, done);
 
 				// Merge Request URL, e.g. https://gitlab.com/gitlab-org/gitlab/-/merge_requests/1
 				} else if (directoryParts.length == 6 && directoryParts[3] === "-" &&

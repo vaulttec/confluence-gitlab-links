@@ -28,6 +28,18 @@
 		</parameters>
 	</xhtml-macro>
 
+	<xhtml-macro key="commit" name="commit" 
+		class="org.vaulttec.confluence.gitlab.links.macro.CommitMacro" >
+		<category name="external-content" />
+		<parameters>
+			<parameter name="url" type="string" default=""
+				required="true">
+				<option key="showNameInPlaceholder" value="false" />
+				<option key="showValueInPlaceholder" value="true" />
+			</parameter>
+		</parameters>
+	</xhtml-macro>
+
 	<xhtml-macro key="issue" name="issue" 
 		class="org.vaulttec.confluence.gitlab.links.macro.IssueMacro" >
 		<category name="external-content" />

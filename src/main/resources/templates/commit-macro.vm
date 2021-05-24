@@ -1,0 +1,21 @@
+#requireResource ("org.vaulttec.confluence-gitlab-links:gitlab-links-resources")
+
+#if ($link)
+	#if ($commit)
+		<span class="gl-commit">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.commit.macro.commit")
+			<a href="$!link.url">$commit.shortId</a>
+			- $commit.title
+		</span>
+	#else
+		<div class="gl-commit">
+			<img class="gl-logo" src="$req.contextPath/download/resources/org.vaulttec.confluence-gitlab-links:gitlab-links-resources/images/gitlab-logo.png"/>
+			$i18n.getText("org.vaulttec.confluence-gitlab-links.commit.macro.commit")
+			<a href="$link.url">$link.name.substring(0,8)</a>
+		</div>
+	#end
+#else
+	#set ($macro = "Commit")
+	#parse ("templates/error.vm")
+#end

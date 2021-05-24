@@ -13,6 +13,15 @@
     white-space: normal;
 }
 
+.gl-commit {
+    background: #ebecf0;
+    padding: 1px 3px;
+    border-radius: 2px;
+    display: inline-block;
+    line-height: 20px;
+    white-space: normal;
+}
+
 .gl-issue {
     background: #ebecf0;
     padding: 1px 3px;

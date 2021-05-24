@@ -32,6 +32,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.vaulttec.confluence.gitlab.links.client.model.Commit;
 import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
 import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
@@ -83,6 +84,13 @@ public class GitLabClientImpl implements GitLabClient {
 	public Version getVersion() {
 		LOG.debug("Get version of GitLab instance");
 		return get("/version?sudo=ghost", Version.class);
+	}
+
+	@Override
+	public Commit getCommit(String projectId, String commitId, String username) {
+		LOG.debug("Get details of commit '{}' in project '{}' for user '{}'", commitId, projectId, username);
+		return get("/projects/" + encode(projectId) + "/repository/commits/" + commitId + "?sudo=" + username,
+				Commit.class);
 	}
 
 	@Override

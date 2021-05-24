@@ -17,6 +17,7 @@
  */
 package org.vaulttec.confluence.gitlab.links.client;
 
+import org.vaulttec.confluence.gitlab.links.client.model.Commit;
 import org.vaulttec.confluence.gitlab.links.client.model.Issue;
 import org.vaulttec.confluence.gitlab.links.client.model.Link;
 import org.vaulttec.confluence.gitlab.links.client.model.MergeRequest;
@@ -32,6 +33,8 @@ public interface GitLabClient {
 	Link getLink(String url);
 
 	Version getVersion();
+
+	Commit getCommit(String projectId, String commitId, String username);
 
 	Issue getIssue(String projectId, String issueId, String username);
 
