@@ -7,7 +7,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.vaulttec</groupId>
     <artifactId>confluence-gitlab-links</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <name>GitLab Links plugin for Confluence</name>
     <description>This Confluence plugin provides special rendering of GitLab URLs.</description>
