@@ -2,13 +2,8 @@
 
 [![build](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml/badge.svg)](https://github.com/vaulttec/confluence-gitlab-links/actions/workflows/build.yml) [![Release](https://img.shields.io/github/release/vaulttec/confluence-gitlab-links.svg)](https://github.com/vaulttec/confluence-gitlab-links/releases/latest)
 
+This plugin provides an easy way to add links for GitLab items in Confluence pages. Just paste a GitLab link in Confluence's WYSIWIG editor and the link gets rendered with additional information retrieved via GitLab's REST API:
 
+![Sample](https://raw.githubusercontent.com/wiki/vaulttec/confluence-gitlab-links/images/GitLab-Links-Sample.png)
 
-Here are the SDK commands you can use:
-
-* atlas-run   -- installs this plugin into the product and starts it on localhost
-* atlas-help  -- prints description for all commands in the SDK
-
-Full documentation is always available at:
-
-https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK
+Information regarding the requirements, installation and configuration of this plugin can be found in the [wiki](https://github.com/vaulttec/confluence-gitlab-links/wiki).
